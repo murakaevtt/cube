@@ -7,13 +7,12 @@ use std::{
 const WIDTH: usize = 80;
 const HEIGHT: usize = 25;
 
-const DISTANCE: f32 = 40.0;   // расстояние до камеры
-const SCALE: f32 = 40.0;  // масштаб
-const Y_SCALE: f32 = 0.5; // поправка по вертикали под шрифт
-const STEP: f32 = 0.7;    // шаг по поверхности куба
-const SIZE: f32 = 8.0;    // полуразмер куба
+const DISTANCE: f32 = 40.0;
+const SCALE: f32 = 40.0;
+const Y_SCALE: f32 = 0.5;
+const STEP: f32 = 0.7;
+const SIZE: f32 = 8.0;
 
-// символы для граней
 const FRONT: u8 = b'%';
 const RIGHT: u8 = b'&';
 const LEFT:  u8 = b'=';
@@ -73,17 +72,17 @@ fn rotate(x: f32, y: f32, z: f32, a: &Ang) -> (f32, f32, f32) {
     let (sy, cy) = a.ay.sin_cos();
     let (sz, cz) = a.az.sin_cos();
 
-    // вокруг X
+    // X
     let y1 = y * cx - z * sx;
     let z1 = y * sx + z * cx;
     let x1 = x;
 
-    // вокруг Y
+    // Y
     let x2 = x1 * cy + z1 * sy;
     let z2 = -x1 * sy + z1 * cy;
     let y2 = y1;
 
-    // вокруг Z
+    // Z
     let x3 = x2 * cz - y2 * sz;
     let y3 = x2 * sz + y2 * cz;
 
@@ -116,13 +115,12 @@ fn main() {
         while x <= SIZE {
             let mut y = -SIZE;
             while y <= SIZE {
-                // 6 граней куба, у каждой свой символ
-                plot_point(x,      y,     -SIZE, &ang, &mut frame, FRONT);  // front
-                plot_point(SIZE,   y,      x,    &ang, &mut frame, RIGHT);  // right
-                plot_point(-SIZE,  y,     -x,    &ang, &mut frame, LEFT);   // left
-                plot_point(-x,     y,      SIZE, &ang, &mut frame, BACK);   // back
-                plot_point(x,     -SIZE,  -y,    &ang, &mut frame, BOTTOM); // bottom
-                plot_point(x,      SIZE,   y,    &ang, &mut frame, TOP);    // top
+                plot_point(x,      y,     -SIZE, &ang, &mut frame, FRONT);
+                plot_point(SIZE,   y,      x,    &ang, &mut frame, RIGHT);
+                plot_point(-SIZE,  y,     -x,    &ang, &mut frame, LEFT);
+                plot_point(-x,     y,      SIZE, &ang, &mut frame, BACK);
+                plot_point(x,     -SIZE,  -y,    &ang, &mut frame, BOTTOM);
+                plot_point(x,      SIZE,   y,    &ang, &mut frame, TOP);
 
                 y += STEP;
             }
