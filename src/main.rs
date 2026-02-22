@@ -56,7 +56,7 @@ impl Frame {
     }
 
     fn flush(&self) {
-        print!("\x1b[HEIGHT");
+        print!("\x1b[H");
         let mut out = io::stdout();
         for y in 0..HEIGHT {
             let start = y * WIDTH;
@@ -104,7 +104,7 @@ fn plot_point(x: f32, y: f32, z: f32, ang: &Ang, f: &mut Frame, ch: u8) {
 }
 
 fn main() {
-    print!("\x1b[2J\x1b[HEIGHT");
+    print!("\x1b[2J\x1b[H");
     let mut ang = Ang { ax: 0.0, ay: 0.0, az: 0.0 };
     let mut frame = Frame::new();
 
